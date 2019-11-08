@@ -1,17 +1,17 @@
-Pipeline {
-   agent any
-     stages {
-            stage('One') {
+pipeline {
+         agent any
+         stages {
+                 stage('One') {
                  steps {
-                     echo 'Hi, welcome to CI/CD Training'
+                     echo 'Hi, this is Zulaikha from edureka'
                  }
-            }
-            stage('Two') {
+                 }
+                 stage('Two') {
                  steps {
                     input('Do you want to proceed?')
                  }
-            }
-            stage('Three') {
+                 }
+                 stage('Three') {
                  when {
                        not {
                             branch "master"
@@ -20,26 +20,26 @@ Pipeline {
                  steps {
                        echo "Hello"
                  }
-             }
-             stage('Four') {
+                 }
+                 stage('Four') {
                  parallel { 
-                       stage('Unit Test') {
+                            stage('Unit Test') {
                            steps {
                                 echo "Running the unit test..."
                            }
-                       }
-                       stage('Integration test') {
-                            agent {
-                                 docker {
-                                      reuseNode true
-                                      image 'ubuntu'
-                                 }
-                            }
-                            steps {
+                           }
+                            stage('Integration test') {
+                              agent {
+                                    docker {
+                                            reuseNode true
+                                            image 'ubuntu'
+                                           }
+                                    }
+                              steps {
                                 echo "Running the integration test..."
-                            }
-                       }
-                 }
-            )   
-		}	
-     }
+                              }
+                           }
+                           }
+                           }
+              }
+}
