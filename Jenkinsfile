@@ -1,45 +1,39 @@
 pipeline {
          agent any
          stages {
-                 stage('One') {
-                 steps {
-                     echo 'Hi, this is Zulaikha from edureka'
+                 stage('1. Building Code...') {
+                   steps {
+                     echo "Building Code..."
+                   }
                  }
+                 stage('2. Unit Testing...') {
+                   steps {
+                     echo "Unit Testing..."
+                   }
                  }
-                 stage('Two') {
-                 steps {
-                    input('Do you want to proceed?')
+                 stage('3. Integration Testing...') {
+                   steps {
+                       echo "Integration Testing..."
+                   }
                  }
-                 }
-                 stage('Three') {
-                 when {
-                       not {
-                            branch "master"
-                       }
-                 }
-                 steps {
-                       echo "Hello"
-                 }
-                 }
-                 stage('Four') {
-                 parallel { 
-                            stage('Unit Test') {
-                           steps {
-                                echo "Running the unit test..."
-                           }
-                           }
-                            stage('Integration test') {
-                              agent {
-                                    docker {
-                                            reuseNode true
-                                            image 'ubuntu'
-                                           }
-                                    }
-                              steps {
-                                echo "Running the integration test..."
+                 stage('4. Integration and Acceptance Testing...') {
+                    parallel { 
+                             stage('Integration Testing') {
+                                steps {
+                                  echo "Running the integration test..."
+                                }
+                             }
+                             stage('System test') {
+                               steps {
+                                 echo "Acceptance Testing..."
                               }
-                           }
-                           }
-                           }
-              }
+                            }
+                   }
+               }
+                 stage('5. Deployment Testing...') {
+                   steps {
+                       echo "Deployment..."
+                   }
+                 }
+       }
 }
